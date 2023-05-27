@@ -37,7 +37,7 @@ function GameScreen({navigation}) {
         <Pressable style={styles.resetButton} 
           onPress={() => setGameState(initialState.resetGame())} 
           title="Reset Game">
-            <Text style={{color: '#fff'}}>Reset Game</Text>
+            <Text style={{color: '#fff',fontWeight: 'bold'}}>Reset Game</Text>
         </Pressable>
       ),
       headerLeft: () => (
@@ -151,7 +151,7 @@ function GameScreen({navigation}) {
                 initialState.resetGame() &
                 navigation.push('Game')
                 //navigation.popToTop()
-              }><Text style={{color: '#fff'}}>Reset Game</Text>
+              }><Text style={{color: '#fff',fontWeight: 'bold'}}>Reset Game</Text>
       </Pressable>
     </SafeAreaView>
   );
