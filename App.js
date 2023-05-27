@@ -142,9 +142,10 @@ function GameScreen({navigation}) {
             <View id='row1-col5' style={initialState.spaceColors[0][4] ? (initialState.p1Spaces[0][4] ? styles.playerOneToken : (initialState.p2Spaces[0][4] ? styles.playerTwoToken : styles.filledSpace)) : styles.emptySpace}><Text>{initialState.board[0][4]}</Text></View>  
             <View id='row1-col6' style={initialState.spaceColors[0][5] ? (initialState.p1Spaces[0][5] ? styles.playerOneToken : (initialState.p2Spaces[0][5] ? styles.playerTwoToken : styles.filledSpace)) : styles.emptySpace}><Text>{initialState.board[0][5]}</Text></View>  
           </View> 
-        <View style={styles.boardGrid}><Text>{//initialState.simpleboard
+        <View style={styles.boardGrid}
+        ><Text>{//initialState.simpleboard
         }</Text></View>           
-      </View>
+      </View>      
       <Pressable style={styles.resetButton} 
               onPress={() => 
                 initialState.resetGame() &
@@ -516,6 +517,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#25292e',
     alignItems: 'center',
+    height: 'auto',
   },
   logoContainer: {
     height: 300,
@@ -538,17 +540,17 @@ const styles = StyleSheet.create({
   },
   resetButton: {
     borderRadius: 5, //on game board: normally 25 for rounding
-    height: 40, //''normally 50
+    height: 40, //normally 50
     width: 100,
     backgroundColor: '#ff0000',
     alignItems: 'center',
     justifyContent: 'center',
   },
   gameContainer: {
-    marginTop: 50,
-    marginBottom: 25,
+    //marginTop: 50,
+    //marginBottom: 25,
     padding: 25,
-    height: 550, //normally 550
+    height: 'auto', //normally 550
     width: 400,
     backgroundColor: '#fff',
     fontWeight: 'bold',
