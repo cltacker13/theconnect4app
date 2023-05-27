@@ -1,5 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, Pressable, Alert, Button } from 'react-native';
 import React from 'react';
@@ -9,7 +10,7 @@ const logoImage = require ('./assets/images/connect4Logo.png');
 
 function HomeScreen({navigation}) {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View>
         <Image source={logoImage} style={styles.logoContainer}></Image>
       </View>
@@ -23,7 +24,7 @@ function HomeScreen({navigation}) {
           </Pressable>
       </View>
       <StatusBar style="auto"></StatusBar>
-    </View>
+    </SafeAreaView>
   ); 
 }
 
@@ -49,7 +50,7 @@ function GameScreen({navigation}) {
     });
   }, [navigation, setGameState ]);
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={{ color: '#fff'}}>  </Text>
       <View style={styles.gameContainer}>
         <View style={styles.gameMessageContainer}>
@@ -151,7 +152,7 @@ function GameScreen({navigation}) {
                 //navigation.popToTop()
               }><Text style={{color: '#fff'}}>Reset Game</Text>
       </Pressable>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -475,29 +476,31 @@ function displayToken() {
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName='Home'>
-        <Stack.Screen 
-          name='Home'
-          component={HomeScreen}
-          options={{title: 'Welcome'}}
-        ></Stack.Screen>
-        <Stack.Screen 
-          name='Game'
-          component={GameScreen}
-          //options={{title: 'Play Game'}}
-          options={({ navigation, route }) => ({
-            headerTitle: " Play a Game",
-            headerRight: () => (
-              <Pressable title="Reset Game"></Pressable>
-            ),
-            headerLeft: () => (
-              <Pressable title="Back"></Pressable>
-            )
-          })}
-        ></Stack.Screen>
-      </Stack.Navigator>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName='Home'>
+          <Stack.Screen 
+            name='Home'
+            component={HomeScreen}
+            options={{title: 'Welcome'}}
+          ></Stack.Screen>
+          <Stack.Screen 
+            name='Game'
+            component={GameScreen}
+            //options={{title: 'Play Game'}}
+            options={({ navigation, route }) => ({
+              headerTitle: " Play a Game",
+              headerRight: () => (
+                <Pressable title="Reset Game"></Pressable>
+              ),
+              headerLeft: () => (
+                <Pressable title="Back"></Pressable>
+              )
+            })}
+          ></Stack.Screen>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
 

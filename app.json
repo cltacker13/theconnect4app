@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/connect4Favicon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.squisssh13.theconnect4app"
     },
     "web": {
       "favicon": "./assets/connect4Favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "99a37535-f1be-4382-950a-f0ddcab018c2"
+      }
     }
   }
 }
