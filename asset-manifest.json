@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.js": "/theconnect4app/static/js/main.b9bf9495.js",
+    "static/js/383.fadbdf7a.js": "/theconnect4app/static/js/383.fadbdf7a.js",
+    "static/media/connect4Logo.png": "/theconnect4app/static/media/connect4Logo.6298e425a5c5d549403c.png",
+    "favicon.ico": "/theconnect4app/favicon.ico",
+    "index.html": "/theconnect4app/index.html",
+    "favicon-32.png": "/theconnect4app/favicon-32.png",
+    "favicon-16.png": "/theconnect4app/favicon-16.png",
+    "manifest.json": "/theconnect4app/manifest.json",
+    "serve.json": "/theconnect4app/serve.json",
+    "main.b9bf9495.js.map": "/theconnect4app/static/js/main.b9bf9495.js.map",
+    "383.fadbdf7a.js.map": "/theconnect4app/static/js/383.fadbdf7a.js.map"
+  },
+  "entrypoints": [
+    "static/js/383.fadbdf7a.js",
+    "static/js/main.b9bf9495.js"
+  ]
+}
