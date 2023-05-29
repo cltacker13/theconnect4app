@@ -160,6 +160,7 @@ function GameScreen({navigation}) {
 var initialState = {
   currentPlayer: '1',
   gameWon: false,
+  validMoves: true,
   displayMessage: 'Player 1, Pick a Column',
   board: [
     {0:'0',1:'0',2:'0',3:'0',4:'0',5:'0',}, //row1 - bottom
@@ -309,7 +310,7 @@ var initialState = {
     }
     return hRowResult;
   },
-  checkDiagonal: function (){
+  checkDiagonal: function () {
     var dResult = false;
     let recentToken = this.tokenCoordinate; //{row,col}
     let p = this.currentPlayer;
@@ -369,6 +370,28 @@ var initialState = {
       //alert(initialState.displayMessage);
     }
     return dResult;
+  },
+  checkStalemate: function() { //basic check for valid moves left.
+    var stalemate = false
+    if (this.gameWon == false) {
+      if (this.board[5][0] == '0'){
+        this.validMoves = true;
+      } else if (this.board[5][1] == '0') {
+        this.validMoves = true;
+      } else if (this.board[5][2] == '0') {
+        this.validMoves = true;
+      } else if (this.board[5][3] == '0') {
+        this.validMoves = true;
+      } else if (this.board[5][4] == '0') {
+        this.validMoves = true;
+      } else if (this.board[5][5] == '0') {
+        this.validMoves = true;
+      } else {
+        this.validMoves = false;
+        stalemate = true;
+      }
+    }
+    return stalemate;
   },
   resetGame: function (){
     this.currentPlayer = '1';
@@ -433,7 +456,6 @@ function placeToken(column){
       } else if (initialState.currentPlayer == '2'){
         initialState.p2Spaces[row-1][column-1] = true;
       }
-      //displayToken();
       if (initialState.checkWin()){
         Alert.alert(
           'Winner!',
@@ -442,7 +464,15 @@ function placeToken(column){
             {text: 'Pick a Column to Start New Game', onPress: () => initialState.resetGame()},
           ],
         );
-      }else{
+      } else if (initialState.checkStalemate()){
+        Alert.alert(
+          'Stalemate, Bummer!',
+          initialState.displayMessage,
+          [ //this still needs to include refresh/reload the page as new still.
+            {text: 'Pick a Column to Start New Game', onPress: () => initialState.resetGame()},
+          ],
+        );
+      } else{
         initialState.turnTrack();
         initialState.updateMessage();
       }
@@ -453,26 +483,6 @@ function placeToken(column){
     alert('Column '+ column +' is not a valid option');
   }
   return initialState.tokenCoordinate; //{row,col}
-}
-
-//Broken: function does not render anything.
-//consider drawing the whole board each time?
-function displayToken() {
-  var playerToken = '';
-  if (initialState.currentPlayer == '1') {
-    playerToken = 'Styles.playerOneToken';
-    //alert(playerToken);
-  } else if (initialState.currentPlayer == '2') {
-    playerToken = 'Styles.playerTwoToken';
-    //alert(playerToken);
-  } else {
-    alert('No display token.');
-  }
-  var newView = (
-  <View style={playerToken}><Text>Player</Text></View> &
-  <View style={styles.emptySpace}></View>
-  );
-  return newView;  
 }
 
 export default function App() {
