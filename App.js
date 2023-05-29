@@ -57,37 +57,37 @@ function GameScreen({navigation}) {
           <Text style={styles.gameMessageText}>{initialState.displayMessage}</Text>
         </View>
           <View style={styles.colselections}>
-            <Pressable style={styles.spaceSeletion} 
+            <Pressable style={(initialState.board[5][0] == "0") ? styles.spaceSeletion : styles.fullSpaceSelection}  
               onPress={() => 
                 placeToken('1') &
                 navigation.push('Game')
               }><Text>1</Text>
             </Pressable>
-            <Pressable style={styles.spaceSeletion} 
+            <Pressable style={(initialState.board[5][1] == "0") ? styles.spaceSeletion : styles.fullSpaceSelection}  
               onPress={() => 
                 placeToken('2') &
                 navigation.push('Game')
               }><Text>2</Text>
             </Pressable>
-            <Pressable style={styles.spaceSeletion} 
+            <Pressable style={(initialState.board[5][2] == "0") ? styles.spaceSeletion : styles.fullSpaceSelection}  
               onPress={() => 
                 placeToken('3') &
                 navigation.push('Game')
               }><Text>3</Text>
             </Pressable>
-            <Pressable style={styles.spaceSeletion} 
+            <Pressable style={(initialState.board[5][3] == "0") ? styles.spaceSeletion : styles.fullSpaceSelection}  
               onPress={() => 
                 placeToken('4') &
                 navigation.push('Game')
               }><Text>4</Text>
             </Pressable>
-            <Pressable style={styles.spaceSeletion} 
+            <Pressable style={(initialState.board[5][4] == "0") ? styles.spaceSeletion : styles.fullSpaceSelection}  
               onPress={() => 
                 placeToken('5') &
                 navigation.push('Game')
               }><Text>5</Text>
             </Pressable>
-            <Pressable style={styles.spaceSeletion} 
+            <Pressable style={(initialState.board[5][5] == "0") ? styles.spaceSeletion : styles.fullSpaceSelection} 
               onPress={() => 
                 placeToken('6') &
                 navigation.push('Game')
@@ -160,7 +160,7 @@ function GameScreen({navigation}) {
 var initialState = {
   currentPlayer: '1',
   gameWon: false,
-  validMoves: true,
+  validMoves: [{0: true, 1: true, 2: true, 3: true, 4: true, 5: true}], //col open status.
   displayMessage: 'Player 1, Pick a Column',
   board: [
     {0:'0',1:'0',2:'0',3:'0',4:'0',5:'0',}, //row1 - bottom
@@ -200,7 +200,7 @@ var initialState = {
   spaceIsFilled: false,
   spaceP1Color: false,
   spaceP2Color: false,
-  turnTrack: function () {
+  turnTrack: function () { //alternates current player.
     if (this.currentPlayer == '1') {
       this.currentPlayer = '2';
     } else if (this.currentPlayer == '2') {
@@ -210,7 +210,7 @@ var initialState = {
     }
     return this.currentPlayer;
   },
-  updateMessage: function () {
+  updateMessage: function () { //turn track display message.
     if (this.currentPlayer == '1') {
       this.displayMessage = 'Player 1, Pick a Column'
     } else if (this.currentPlayer == '2') {
@@ -220,7 +220,7 @@ var initialState = {
     }
     return this.displayMessage;
   },
-  checkSpace: function (column) {
+  checkSpace: function (column) { //checks col for open space & returns row#.
     //let activeplayer = this.currentPlayer
     //alert(this.board[0][column-1]);
     var openRow;
@@ -248,7 +248,7 @@ var initialState = {
     //alert('Open Space [col' + column + ', row' + openRow +']');
     return openRow;
   },
-  checkWin: function () {
+  checkWin: function () { //checks for any of the win types.
     var winResult = false;
     this.simpleboard = 
     '|' + initialState.board[5][0] + initialState.board[5][1] + initialState.board[5][2] + initialState.board[5][3] + initialState.board[5][4] + initialState.board[5][5] + '|\n' +
@@ -263,7 +263,7 @@ var initialState = {
     }
     return winResult;
   },
-  checkVertical: function () {
+  checkVertical: function () { //checks for vertical win.
     var vColResult = false;
     let recentToken = this.tokenCoordinate; //{row,col}
     let p = this.currentPlayer;
@@ -279,7 +279,7 @@ var initialState = {
     }
     return vColResult;
   },
-  checkHorizontal: function() {
+  checkHorizontal: function() { //checks for horizontal win.
     var hRowResult = false;
     let recentToken = this.tokenCoordinate; //{row,col}
     let p = this.currentPlayer;
@@ -310,7 +310,7 @@ var initialState = {
     }
     return hRowResult;
   },
-  checkDiagonal: function () {
+  checkDiagonal: function () { //checks for diagonal win.
     var dResult = false;
     let recentToken = this.tokenCoordinate; //{row,col}
     let p = this.currentPlayer;
@@ -372,28 +372,24 @@ var initialState = {
     return dResult;
   },
   checkStalemate: function() { //basic check for valid moves left.
-    var stalemate = false
+    var stalemate = false;
     if (this.gameWon == false) {
-      if (this.board[5][0] == '0'){
-        this.validMoves = true;
-      } else if (this.board[5][1] == '0') {
-        this.validMoves = true;
-      } else if (this.board[5][2] == '0') {
-        this.validMoves = true;
-      } else if (this.board[5][3] == '0') {
-        this.validMoves = true;
-      } else if (this.board[5][4] == '0') {
-        this.validMoves = true;
-      } else if (this.board[5][5] == '0') {
-        this.validMoves = true;
+      if (this.board[5][0] == '0' 
+        || this.board[5][1] == '0' 
+        || this.board[5][2] == '0' 
+        || this.board[5][3] == '0'
+        || this.board[5][4] == '0'
+        || this.board[5][5] == '0') {
+        //alert("valid move exists");
       } else {
-        this.validMoves = false;
+        //alert("no moves left");
         stalemate = true;
+        this.displayMessage = "Stalemate, start a new game.";
       }
     }
     return stalemate;
   },
-  resetGame: function (){
+  resetGame: function (){ //reset current game to initial settings.
     this.currentPlayer = '1';
     this.gameWon = false;
     this.displayMessage = 'Player 1, Pick a Column';
@@ -440,7 +436,7 @@ var initialState = {
 }
 
 
-function placeToken(column){
+function placeToken(column){ //primary play action.
   if (column < 7 && column > -1){
     var row = initialState.checkSpace(column);
     if (row < 7 && row > -1){
@@ -466,7 +462,7 @@ function placeToken(column){
         );
       } else if (initialState.checkStalemate()){
         Alert.alert(
-          'Stalemate, Bummer!',
+          'Stalemate!',
           initialState.displayMessage,
           [ //this still needs to include refresh/reload the page as new still.
             {text: 'Pick a Column to Start New Game', onPress: () => initialState.resetGame()},
@@ -589,6 +585,17 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#77DD77',
     //backgroundColor: '#77DD77',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  fullSpaceSelection: {
+    margin: 5,
+    height: 50,
+    width: 50,
+    borderRadius: 50,
+    borderWidth: 2,
+    borderColor: '#25292e',
+    backgroundColor: '#BFBFBF',
     alignItems: 'center',
     justifyContent: 'center',
   },
