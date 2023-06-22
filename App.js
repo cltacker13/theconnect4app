@@ -15,13 +15,42 @@ function HomeScreen({navigation}) {
         <Image source={logoImage} style={styles.logoContainer}></Image>
       </View>
       <View>
-          <Pressable style={styles.button} 
+          <Pressable style={styles.playButton} 
               onPress={() => 
                 // alert('Starting Game.')
                   navigation.navigate('Game')
               }>
-              <Text style={styles.buttonLabel}>Play Game</Text>
+              <Text style={styles.playButtonLabel}>Play Game</Text>
           </Pressable>
+      </View>
+      <StatusBar style="auto"></StatusBar>
+    </SafeAreaView>
+  ); 
+}
+
+function ProfileScreen({navigation}) {
+  return (
+    <SafeAreaView style={styles.container}>
+      <View>
+        <Text style={{color: '#fff',fontWeight: 'bold'}}>
+          Hello {currentUserData.userName}!</Text>
+      </View>
+      <View>
+        <Text style={{color: '#fff',fontWeight: 'bold'}}>
+          Account Data</Text>
+          <View>
+          <Text style={{color: '#fff'}}>
+          Email: {currentUserData.userLoginEmail}</Text>
+          <Text style={{color: '#fff'}}>
+          Total Wins: {currentUserData.userTotalGameWins}</Text>
+          </View>
+      </View>
+      <View>
+        <Pressable style={styles.profileButton}
+          onPress={() => navigation.push('Home') }
+          title="logout">
+            <Text style={{color: '#fff',fontWeight: 'bold'}}>Logout</Text>
+        </Pressable> 
       </View>
       <StatusBar style="auto"></StatusBar>
     </SafeAreaView>
@@ -34,11 +63,16 @@ function GameScreen({navigation}) {
   React.useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Pressable style={styles.resetButton} 
-          onPress={() => setGameState(initialState.resetGame())} 
-          title="Reset Game">
-            <Text style={{color: '#fff',fontWeight: 'bold'}}>Reset Game</Text>
-        </Pressable>
+        <Pressable style={styles.profileButton}
+          onPress={() => navigation.push('Profile') }
+          title="userProfile">
+            <Text style={{color: '#fff',fontWeight: 'bold'}}>{currentUserData.userName}</Text>
+        </Pressable>  
+        //<Pressable style={styles.resetButton} 
+          //onPress={() => setGameState(initialState.resetGame())} 
+          //title="Reset Game">
+            //<Text style={{color: '#fff',fontWeight: 'bold'}}>Reset Game</Text>
+        //</Pressable>
       ),
       headerLeft: () => (
         <Pressable style={styles.headerBackContainer}
@@ -156,6 +190,63 @@ function GameScreen({navigation}) {
     </SafeAreaView>
   );
 };
+
+var userSampleData = [
+  [{userId: 'abc123def'},
+  {userName: 'Sam Red'},
+  {userLoginEmail: 'sample@gmail.com'},
+  {userLoginPassword: 'sample123'},
+  {userTotalGameWins: 4}],
+  [{userId: 'zyx098wvu'},
+  {userName: 'Sally Blue'},
+  {userLoginEmail: 'test@gmail.com'},
+  {userLoginPassword: 'test098'},
+  {userTotalGameWins: 2}]
+]
+
+var currentUserData = {
+  userId: '9f84gp94h',
+  userName: 'Chrystal',
+  userLoginEmail: 'chrystal@test.com',
+  userLoginPassword: 'abc123',
+  userTotalGameWins: 9
+}
+
+function getAllUserData() {
+  return userSampleData;
+}
+function getUserDataByID(theUserId) {
+  var theUserData = [];
+  console.log(userSampleData);
+  return theUserData;
+}
+
+function userCreateNewAccount(newUserName, newUserEmail, newUserPassword){
+  var newAccount = [
+    {userId: ''},
+    {userName: ''},
+    {userLoginEmail: ''},
+    {userLoginPassword: ''},
+    {userTotalGameWins: 0}
+  ]
+  let arrayLength = userSampleData.length;
+  //TODO: check for existing user(s)
+  if(userSampleData.userLoginEmail == ''){
+      newAccount.userId = 'uID1' ; //TODO: randomly generate without duplicating
+      newAccount.userName = newUserName;
+      newAccount.userLoginEmail = newUserEmail;
+      newAccount.userLoginPassword = newUserPassword;
+      newAccount.userTotalGameWins = 0;
+
+      userSampleData.push(newAccount);
+      if (arrayLength > userSampleData.length){
+        console.log('New Account Created');
+      } else {
+        console.log('Account creation failed')
+      }
+    }
+  return;
+}
 
 var initialState = {
   currentPlayer: '1',
@@ -453,6 +544,7 @@ function placeToken(column){ //primary play action.
         initialState.p2Spaces[row-1][column-1] = true;
       }
       if (initialState.checkWin()){
+        currentUserData.userTotalGameWins++,
         Alert.alert(
           'Winner!',
           initialState.displayMessage,
@@ -492,13 +584,19 @@ export default function App() {
             options={{title: 'Welcome'}}
           ></Stack.Screen>
           <Stack.Screen 
+            name='Profile'
+            component={ProfileScreen}
+            options={{title: 'My Profile'}}
+          ></Stack.Screen>
+          <Stack.Screen 
             name='Game'
             component={GameScreen}
             //options={{title: 'Play Game'}}
             options={({ navigation, route }) => ({
               headerTitle: " Play a Game",
               headerRight: () => (
-                <Pressable title="Reset Game"></Pressable>
+                <Pressable title="Profile"></Pressable>
+                //<Pressable title="Reset Game"></Pressable>
               ),
               headerLeft: () => (
                 <Pressable title="Back"></Pressable>
@@ -531,7 +629,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     margin: 50,
   },
-  button: {
+  playButton: {
     borderRadius: 25, 
     height: 75,
     width: 200,
@@ -539,10 +637,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  buttonLabel: {
+  playButtonLabel: {
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 25,
+  },
+  profileButton: {
+    borderRadius: 15,
+    height: 40,
+    width: 'auto',
+    padding: 5,
+    marginRight: 5,
+    backgroundColor: '#ab7bb8',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   resetButton: {
     borderRadius: 5, //on game board: normally 25 for rounding
