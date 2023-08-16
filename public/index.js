@@ -6,6 +6,6 @@ root.innerHTML = App();
 
 function App() {
     return (
-      <div>It loads!</div>
+      '<div>It loads!</div>'
     );
   }
