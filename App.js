@@ -7,6 +7,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, Pressable, Alert, Button } from 'react-native';
 import React from 'react';
 
+/*
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCdjPP6oTh9WMWgD6fNqvUr0YBgns3dIZ8",
@@ -23,7 +24,7 @@ const app = initializeApp(firebaseConfig);
 
 const root = createRoot(document.getElementById("root"));
 root.render(<App />);
-
+*/
 
 const Stack = createNativeStackNavigator();
 const logoImage = require ('./assets/images/connect4Logo.png');
