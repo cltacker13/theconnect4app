@@ -16,6 +16,8 @@ const firebaseConfig = {
 // Initialize Firebase
 //const app = initializeApp(firebaseConfig);
 
+App();
+
 const root = hydrateRoot(document.getElementById('root'));
-root.render(< App />);
+root.render("Render?");
 
