@@ -1,6 +1,6 @@
 {
   "name": "theconnect4app",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "homepage": "https://cltacker13.github.io/theconnect4app",
   "scripts": {
@@ -19,6 +19,7 @@
     "expo-dev-client": "~2.2.1",
     "expo-status-bar": "~1.4.4",
     "expo-system-ui": "^2.2.1",
+    "firebase": "^10.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.71.8",

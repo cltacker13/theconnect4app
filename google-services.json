@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "958341876928",
+    "firebase_url": "https://theconnect4app-default-rtdb.firebaseio.com",
+    "project_id": "theconnect4app",
+    "storage_bucket": "theconnect4app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:958341876928:android:a69dc8ae3325860ee37125",
+        "android_client_info": {
+          "package_name": "com.theconnect4app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "958341876928-ie534jrjk5ks8c7b9vjp1fncofij2n49.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCK1zaEVNWxmx7GH8-JU023n_DLAq4sPSs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "958341876928-ie534jrjk5ks8c7b9vjp1fncofij2n49.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
