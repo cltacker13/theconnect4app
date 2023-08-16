@@ -1,6 +1,6 @@
 //import { initializeApp } from 'firebase/app';
-import { createRoot, hydrateRoot  } from '/react-dom/client';
-import { App } from '/App.js';
+import { createRoot, hydrateRoot  } from 'react-dom/client';
+import { App } from './App.js';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -16,6 +16,6 @@ const firebaseConfig = {
 // Initialize Firebase
 //const app = initializeApp(firebaseConfig);
 
-const root = hydrateRoot(document.getElementById('root'));
+const root = document.getElementById('root');
 root.render("Render?");
 
