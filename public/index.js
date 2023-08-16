@@ -17,5 +17,5 @@ const firebaseConfig = {
 //const app = initializeApp(firebaseConfig);
 
 const root = document.getElementById('root');
-root.innerHTML("<h1>Render?</h1>");
+root.innerHTML = "<h1>Render?</h1>";
 
