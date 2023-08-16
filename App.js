@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app';
+import { createRoot } from 'react-dom/client'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SafeAreaProvider, SafeAreaView, initialWindowMetrics } from 'react-native-safe-area-context';
@@ -19,6 +20,9 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+const root = createRoot(document.getElementById("root"));
+root.render(App());
 
 
 const Stack = createNativeStackNavigator();
