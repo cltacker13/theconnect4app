@@ -1,7 +1,7 @@
 //import { initializeApp } from 'firebase/app';
-import { createRoot, hydrateRoot  } from 'react-dom/client';
-import { App } from './App.js';
-
+//import { createRoot, hydrateRoot  } from 'react-dom/client';
+//import { App } from './App.js';
+/*
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCdjPP6oTh9WMWgD6fNqvUr0YBgns3dIZ8",
@@ -12,10 +12,10 @@ const firebaseConfig = {
   messagingSenderId: "958341876928",
   appId: "1:958341876928:web:5ca6d83834f6fe32e37125"
 };
-
+*/
 // Initialize Firebase
 //const app = initializeApp(firebaseConfig);
 
 const root = document.getElementById('root');
-root.render("Render?");
+root.innerHTML("<h1>Render?</h1>");
 
