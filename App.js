@@ -7,6 +7,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, Pressable, Alert, Button } from 'react-native';
 import React from 'react';
 
+console.log("App.js File");
 /*
 // Your web app's Firebase configuration
 const firebaseConfig = {
