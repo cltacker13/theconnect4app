@@ -59,37 +59,43 @@ function GameScreen({navigation}) {
           <View style={styles.colselections}>
             <Pressable style={styles.spaceSeletion} 
               onPress={() => 
-                placeToken('1') &
+                (!initialState.gameWon) ? placeToken('1') &
+                navigation.push('Game'): initialState.updateMessage() &
                 navigation.push('Game')
               }><Text>1</Text>
             </Pressable>
             <Pressable style={styles.spaceSeletion} 
               onPress={() => 
-                placeToken('2') &
+                (!initialState.gameWon) ? placeToken('2') &
+                navigation.push('Game'): initialState.updateMessage() &
                 navigation.push('Game')
               }><Text>2</Text>
             </Pressable>
             <Pressable style={styles.spaceSeletion} 
               onPress={() => 
-                placeToken('3') &
+                (!initialState.gameWon) ? placeToken('3') &
+                navigation.push('Game'): initialState.updateMessage() &
                 navigation.push('Game')
               }><Text>3</Text>
             </Pressable>
             <Pressable style={styles.spaceSeletion} 
               onPress={() => 
-                placeToken('4') &
+                (!initialState.gameWon) ? placeToken('4') &
+                navigation.push('Game'): initialState.updateMessage() &
                 navigation.push('Game')
               }><Text>4</Text>
             </Pressable>
             <Pressable style={styles.spaceSeletion} 
               onPress={() => 
-                placeToken('5') &
+                (!initialState.gameWon) ? placeToken('5') &
+                navigation.push('Game'): initialState.updateMessage() &
                 navigation.push('Game')
               }><Text>5</Text>
             </Pressable>
             <Pressable style={styles.spaceSeletion} 
               onPress={() => 
-                placeToken('6') &
+                (!initialState.gameWon) ? placeToken('6') &
+                navigation.push('Game'): initialState.updateMessage() &
                 navigation.push('Game')
               }><Text>6</Text>
             </Pressable>
@@ -424,7 +430,7 @@ var initialState = {
 
 
 function placeToken(column){
-  if (initialState.gameWon == true) {
+  if (initialState.gameWon) {
     initialState.displayMessage = "Game Over, Reset to Play Again.";
   } else if (initialState.gameWon == false){
     if (column < 7 && column > -1){
