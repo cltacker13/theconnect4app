@@ -222,33 +222,36 @@ var initialState = {
   checkSpace: function (column) {
     //let activeplayer = this.currentPlayer
     //alert(this.board[0][column-1]);
-    var openRow;
-    if (this.board[0][column-1] == '0') {
-      //row1[column] = activeplayer
-      openRow = 1
-    } else if (this.board[1][column-1] == '0') {
-      //row2[column] = activeplayer
-      openRow = 2
-    } else if (this.board[2][column-1] == '0') {
-      //row3[column] = activeplayer
-      openRow = 3
-    } else if (this.board[3][column-1] == '0') {
-      //row4[column] = activeplayer
-      openRow = 4
-    } else if (this.board[4][column-1] == '0') {
-      //row5[column] = activeplayer
-      openRow = 5
-    } else if (this.board[5][column-1] == '0') {
-      //row6[column] = activeplayer
-      openRow = 6
+    if (this.gameWon == false){
+      var openRow;
+      if (this.board[0][column-1] == '0') {
+        //row1[column] = activeplayer
+        openRow = 1
+      } else if (this.board[1][column-1] == '0') {
+        //row2[column] = activeplayer
+        openRow = 2
+      } else if (this.board[2][column-1] == '0') {
+        //row3[column] = activeplayer
+        openRow = 3
+      } else if (this.board[3][column-1] == '0') {
+        //row4[column] = activeplayer
+        openRow = 4
+      } else if (this.board[4][column-1] == '0') {
+        //row5[column] = activeplayer
+        openRow = 5
+      } else if (this.board[5][column-1] == '0') {
+        //row6[column] = activeplayer
+        openRow = 6
+      } else {
+        //alert('Space not available')
+      }
+      //alert('Open Space [col' + column + ', row' + openRow +']');
+      return openRow;
     } else {
-      //alert('Space not available')
+      this.displayMessage = "Game Over, Reset to Play Again.";
     }
-    //alert('Open Space [col' + column + ', row' + openRow +']');
-    return openRow;
   },
   checkWin: function () {
-    var winResult = false;
     this.simpleboard = 
     '|' + initialState.board[5][0] + initialState.board[5][1] + initialState.board[5][2] + initialState.board[5][3] + initialState.board[5][4] + initialState.board[5][5] + '|\n' +
     '|' + initialState.board[4][0] + initialState.board[4][1] + initialState.board[4][2] + initialState.board[4][3] + initialState.board[4][4] + initialState.board[4][5] + '|\n' +
@@ -258,9 +261,9 @@ var initialState = {
     '|' + initialState.board[0][0] + initialState.board[0][1] + initialState.board[0][2] + initialState.board[0][3] + initialState.board[0][4] + initialState.board[0][5] + '|' ;
     //alert(this.simpleboard);
     if(this.checkVertical() || this.checkHorizontal() || this.checkDiagonal()){
-      winResult = true;
+      this.gameWon = true;
     }
-    return winResult;
+    return this.gameWon;
   },
   checkVertical: function () {
     var vColResult = false;
