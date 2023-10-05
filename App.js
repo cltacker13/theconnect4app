@@ -59,43 +59,43 @@ function GameScreen({navigation}) {
           <View style={styles.colselections}>
             <Pressable style={styles.spaceSeletion} 
               onPress={() => 
-                (!initialState.gameWon) ? placeToken('1') &
-                navigation.push('Game'): initialState.updateMessage() &
+                (initialState.gameWon) ? initialState.updateMessage() &
+                navigation.push('Game'): placeToken('1') &
                 navigation.push('Game')
               }><Text>1</Text>
             </Pressable>
             <Pressable style={styles.spaceSeletion} 
               onPress={() => 
-                (!initialState.gameWon) ? placeToken('2') &
-                navigation.push('Game'): initialState.updateMessage() &
+                (initialState.gameWon) ? initialState.updateMessage() &
+                navigation.push('Game'): placeToken('2') &
                 navigation.push('Game')
               }><Text>2</Text>
             </Pressable>
             <Pressable style={styles.spaceSeletion} 
               onPress={() => 
-                (!initialState.gameWon) ? placeToken('3') &
-                navigation.push('Game'): initialState.updateMessage() &
+                (initialState.gameWon) ? initialState.updateMessage() &
+                navigation.push('Game'): placeToken('3') &
                 navigation.push('Game')
               }><Text>3</Text>
             </Pressable>
             <Pressable style={styles.spaceSeletion} 
               onPress={() => 
-                (!initialState.gameWon) ? placeToken('4') &
-                navigation.push('Game'): initialState.updateMessage() &
+                (initialState.gameWon) ? initialState.updateMessage() &
+                navigation.push('Game'): placeToken('4') &
                 navigation.push('Game')
               }><Text>4</Text>
             </Pressable>
             <Pressable style={styles.spaceSeletion} 
               onPress={() => 
-                (!initialState.gameWon) ? placeToken('5') &
-                navigation.push('Game'): initialState.updateMessage() &
+                (initialState.gameWon) ? initialState.updateMessage() &
+                navigation.push('Game'): placeToken('5') &
                 navigation.push('Game')
               }><Text>5</Text>
             </Pressable>
             <Pressable style={styles.spaceSeletion} 
               onPress={() => 
-                (!initialState.gameWon) ? placeToken('6') &
-                navigation.push('Game'): initialState.updateMessage() &
+                (initialState.gameWon) ? initialState.updateMessage() &
+                navigation.push('Game'): placeToken('6') &
                 navigation.push('Game')
               }><Text>6</Text>
             </Pressable>
