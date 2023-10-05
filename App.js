@@ -424,41 +424,45 @@ var initialState = {
 
 
 function placeToken(column){
-  if (column < 7 && column > -1){
+  if (initialState.gameWon == true) {
+    initialState.displayMessage = "Game Over, Reset to Play Again.";
+  } else if (initialState.gameWon == false){
+    if (column < 7 && column > -1){
     var row = initialState.checkSpace(column);
-    if (row < 7 && row > -1){
-      initialState.tokenCoordinate = {0:row,1:column};
-      //alert(initialState.tokenCoordinate[0]+','+initialState.tokenCoordinate[1]);
-      initialState.board[row-1][column-1] = initialState.currentPlayer; 
-      //alert(initialState.currentPlayer + ' placed a token in column ' + column + ' row ' + row);
-      // unelegant method to set style color, but functional.
-      initialState.spaceIsFilled = true;
-      initialState.spaceColors[row-1][column-1] = initialState.currentPlayer;
-      if (initialState.currentPlayer == '1'){
-        initialState.p1Spaces[row-1][column-1] = true;
-      } else if (initialState.currentPlayer == '2'){
-        initialState.p2Spaces[row-1][column-1] = true;
+      if (row < 7 && row > -1){
+        initialState.tokenCoordinate = {0:row,1:column};
+        //alert(initialState.tokenCoordinate[0]+','+initialState.tokenCoordinate[1]);
+        initialState.board[row-1][column-1] = initialState.currentPlayer; 
+        //alert(initialState.currentPlayer + ' placed a token in column ' + column + ' row ' + row);
+        // unelegant method to set style color, but functional.
+        initialState.spaceIsFilled = true;
+        initialState.spaceColors[row-1][column-1] = initialState.currentPlayer;
+        if (initialState.currentPlayer == '1'){
+          initialState.p1Spaces[row-1][column-1] = true;
+        } else if (initialState.currentPlayer == '2'){
+          initialState.p2Spaces[row-1][column-1] = true;
+        }
+        //displayToken();
+        if (initialState.checkWin()){
+          Alert.alert(
+            'Winner!',
+            initialState.displayMessage,
+            [ //this still needs to include refresh/reload the page as new still.
+              {text: 'Pick a Column to Start New Game', onPress: () => initialState.resetGame()},
+            ],
+          );
+        }else{
+          initialState.turnTrack();
+          initialState.updateMessage();
+        }
+      } else {
+        alert('Try another column.');
       }
-      //displayToken();
-      if (initialState.checkWin()){
-        Alert.alert(
-          'Winner!',
-          initialState.displayMessage,
-          [ //this still needs to include refresh/reload the page as new still.
-            {text: 'Pick a Column to Start New Game', onPress: () => initialState.resetGame()},
-          ],
-        );
-      }else{
-        initialState.turnTrack();
-        initialState.updateMessage();
-      }
-    } else{
-      alert('Try another column.');
+    } else {
+      alert('Column '+ column +' is not a valid option');
     }
-  } else {
-    alert('Column '+ column +' is not a valid option');
+    return initialState.tokenCoordinate; //{row,col}
   }
-  return initialState.tokenCoordinate; //{row,col}
 }
 
 //Broken: function does not render anything.
