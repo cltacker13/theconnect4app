@@ -210,7 +210,9 @@ var initialState = {
     return this.currentPlayer;
   },
   updateMessage: function () {
-    if (this.currentPlayer == '1') {
+    if (this.gameWon == true) {
+      this.displayMessage = "Game Over, Reset to Play Again.";
+    } else if (this.currentPlayer == '1') {
       this.displayMessage = 'Player 1, Pick a Column'
     } else if (this.currentPlayer == '2') {
       this.displayMessage = 'Player 2, Pick a Column'
@@ -222,7 +224,9 @@ var initialState = {
   checkSpace: function (column) {
     //let activeplayer = this.currentPlayer
     //alert(this.board[0][column-1]);
-    if (this.gameWon == false){
+    if (this.gameWon == true){
+      this.displayMessage = "Game Over, Reset to Play Again.";
+    } else if (this.gameWon == false){
       var openRow;
       if (this.board[0][column-1] == '0') {
         //row1[column] = activeplayer
@@ -244,11 +248,10 @@ var initialState = {
         openRow = 6
       } else {
         //alert('Space not available')
+        this.displayMessage = "Space not available.";
       }
       //alert('Open Space [col' + column + ', row' + openRow +']');
       return openRow;
-    } else {
-      this.displayMessage = "Game Over, Reset to Play Again.";
     }
   },
   checkWin: function () {
